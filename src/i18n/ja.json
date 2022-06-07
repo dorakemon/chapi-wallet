@@ -1,0 +1,14 @@
+{
+  "features": {
+    "boundVc": {
+      "verifyStatus.valid": "検証成功",
+      "verifyStatus.invalid": "検証失敗",
+      "verifyStatus.unchecked": "未検証"
+    },
+    "unboundVc": {
+      "verifyStatus.valid": "検証成功",
+      "verifyStatus.invalid": "検証失敗",
+      "verifyStatus.unchecked": "未検証"
+    }
+  }
+}

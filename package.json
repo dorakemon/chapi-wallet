@@ -7,14 +7,16 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:run": "tsc && vite build && http-server dist -S --cors -p 8085 --key ./cert/localhost+1-key.pem --cert ./cert/localhost+1.pem",
-    "publish": "firebase deploy",
+    "publish": "tsc && vite build && firebase deploy",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.5",
     "credential-handler-polyfill": "3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
+    "react-syntax-highlighter": "^15.5.0",
     "web-credential-handler": "2.0.1"
   },
   "devDependencies": {

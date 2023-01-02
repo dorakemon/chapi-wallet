@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:run": "tsc && vite build && http-server dist -S --cors -p 8085 --key ./cert/localhost+1-key.pem --cert ./cert/localhost+1.pem",
-    "publish": "tsc && vite build && firebase deploy",
+    "publish:build": "tsc && vite build && firebase deploy",
     "preview": "vite preview"
   },
   "dependencies": {

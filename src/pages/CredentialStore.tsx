@@ -24,18 +24,19 @@ export const CredentialStore = () => {
   const handleStoreEvent = async () => {
     const event = await WebCredentialHandler.receiveCredentialEvent();
     storeEvent.current = event;
+    const dataType: string = event.credential.dataType;
     console.log("Store Credential Event:", event.type, event);
-    if (event.type === "CreateCommitmentRequest") {
+    if (dataType === "CreateCommitmentRequest") {
       setStoreEventPayload({
         type: "CreateSignatureRequest",
         payload: event.credential.data
       });
-    } else if (event.type === "BoundVerifiableCredential") {
+    } else if (dataType === "BoundVerifiableCredential") {
       setStoreEventPayload({
         type: "StoreBoundCredential",
         payload: event.credential.data
       });
-    } else if (event.type === "VerifiableCredential") {
+    } else if (dataType === "VerifiableCredential") {
       setStoreEventPayload({
         type: "StoreUnboundCredential",
         payload: event.credential.data

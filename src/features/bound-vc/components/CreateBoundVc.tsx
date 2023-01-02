@@ -1,10 +1,11 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Chip, Grid, Typography } from "@mui/material";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 import { VCType } from "@/domain/models";
 import { useDownloadFile } from "@/hooks";
 
+import { VerifyChipStyle } from "../constants/verify-status";
 import { useUnblindBoundVc } from "../hooks/useUnblindBoundVc";
 import { useVerifyBoundVc } from "../hooks/useVerifyBoundVc";
 
@@ -12,12 +13,6 @@ type Props = {
   blindBoundVc: VCType;
   onCloseBtnClicked: () => void;
 };
-
-const content = JSON.stringify(
-  { asdf: "asdfsadfasdfasdkfjaslfdjaslkalsdfaslkdfj;aslkfj;laskjf;lsakdjf;lk" },
-  null,
-  2
-);
 
 export const CreateBoundVc: React.FC<Props> = (props) => {
   const { unblindedVc, unblindVcHandler } = useUnblindBoundVc();
@@ -33,6 +28,11 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
     });
   };
 
+  const unblindHandler = () => {
+    // FIXME: get from cookie
+    unblindVcHandler(props.blindBoundVc, "");
+  };
+
   return (
     <Grid justifyContent="center" container direction="column" mt={2}>
       <Grid item>
@@ -41,22 +41,41 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
           alignItems="start"
           justifyContent="center"
           spacing={3}
+          maxWidth="90vw"
           container
         >
           <Grid sm={6} xs={12} item>
-            <Typography variant="subtitle1">
-              Credential Store Request Input
-            </Typography>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="subtitle1">Blind Bound VC</Typography>
+              </Grid>
+              <Grid item>
+                <Button variant="contained" onClick={unblindHandler}>
+                  Unblind
+                </Button>
+              </Grid>
+            </Grid>
             <SyntaxHighlighter language="json" style={monokaiSublime}>
-              {content}
+              {JSON.stringify(props.blindBoundVc, null, 2)}
             </SyntaxHighlighter>
           </Grid>
           <Grid sm={6} xs={12} item>
-            <Typography variant="subtitle1">
-              Credential Store Request
-            </Typography>
+            <Grid container alignItems="center" justifyContent="space-between">
+              <Grid item>
+                <Typography variant="subtitle1">Bound VC</Typography>
+              </Grid>
+              <Grid item>
+                <Chip
+                  label={VerifyChipStyle[verifyStatus].text}
+                  color={VerifyChipStyle[verifyStatus].color}
+                  variant={VerifyChipStyle[verifyStatus].variant}
+                  onClick={() => verifyVcHandler(unblindedVc!)}
+                  sx={{ height: "36.5px" }}
+                />
+              </Grid>
+            </Grid>
             <SyntaxHighlighter language="json" style={monokaiSublime}>
-              {content}
+              {unblindedVc ? JSON.stringify(unblindedVc, null, 2) : ""}
             </SyntaxHighlighter>
           </Grid>
         </Grid>

@@ -26,5 +26,5 @@ export const WalletWorker = () => {
     };
     worker();
   });
-  return <h3>Wallet Worker Page</h3>;
+  return <></>;
 };

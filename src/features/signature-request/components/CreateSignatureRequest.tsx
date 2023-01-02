@@ -26,29 +26,26 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
         props.sigRequestInput
       );
       setSigReqJson(JSON.stringify(sigRequest, null, 2));
+      props.setSigRequest(sigRequest);
     };
     init();
-  }, [createSignatureRequestHandler, props.sigRequestInput]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.sigRequestInput]);
 
   const retBtnHandler = () => {
     if (!sigRequest) return;
-    props.setSigRequest(sigRequest);
     props.closeHandler();
   };
 
   return (
-    <Grid
-      direction="column"
-      justifyContent="center"
-      // alignItems="center"
-      container
-    >
+    <Grid direction="column" justifyContent="center" container>
       <Grid item>
         <Grid
           direction="row"
           alignItems="start"
           justifyContent="center"
           spacing={3}
+          maxWidth="90vw"
           container
         >
           <Grid sm={6} xs={12} item>

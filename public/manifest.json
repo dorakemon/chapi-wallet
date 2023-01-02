@@ -2,13 +2,18 @@
   "icons": [
     {
       "sizes": "48x48 64x64",
-      "src": "wallet-icon.png",
+      "src": "icon.png",
       "type": "image/png"
     }
   ],
   "name": "Demo Wallet",
   "credential_handler": {
     "url": "/wallet-worker",
-    "enabledTypes": ["VerifiablePresentation"]
+    "enabledTypes": [
+      "VerifiablePresentation",
+      "CreateCommitmentRequest",
+      "VerifiableCredential",
+      "BoundVerifiableCredential"
+    ]
   }
 }

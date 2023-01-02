@@ -1,0 +1,15 @@
+{
+  "didkey": "did:key:z5TcD1Bf9bh6Ni5BLxK2JTyNPbXKEu3iVW5AsAWGktLQwPxB84vENc7WCexwQvM96ZJbtPqHPJXLPBruW8M3jxxr5hctSy9bPBBLsGUQAFrb1dMayCkSnASfJm9joUxNo7r7ao1fy82HXRFHeRMsjf4E7bfjDagnsfdF3v4A3k9H6y2bkPAojvYUJtJFh4UV3e2Sm6T19#zUC736f2ivbBHKgpy5our6zTpifcbooHFf7jpWEdhGn5XGy8syoc6ZQrWpqxNdfi6E2zwuHDzAeFGbNXorMWzxhs2AzgXQEWnHwymZtftmez6VPigTdeomo2KmcrohNxx4AW8Qo",
+  "controller": "did:key:z5TcD1Bf9bh6Ni5BLxK2JTyNPbXKEu3iVW5AsAWGktLQwPxB84vENc7WCexwQvM96ZJbtPqHPJXLPBruW8M3jxxr5hctSy9bPBBLsGUQAFrb1dMayCkSnASfJm9joUxNo7r7ao1fy82HXRFHeRMsjf4E7bfjDagnsfdF3v4A3k9H6y2bkPAojvYUJtJFh4UV3e2Sm6T19",
+  "public": {
+    "kty": "EC",
+    "crv": "Bls12381G2",
+    "x": "hkrsOqx4-MFB52w0T9srwr8IGybz_qx3olwpYpjFEZTA1ShY4PGFjJh1egOOVQ1NFgTWjjhqCCBg-u-N1d4j5XQQg7dRTc-rdbSK5pqHAXWzSX4ecjhjm96XAtbebVyY"
+  },
+  "private": {
+    "kty": "EC",
+    "crv": "Bls12381G2",
+    "x": "hkrsOqx4-MFB52w0T9srwr8IGybz_qx3olwpYpjFEZTA1ShY4PGFjJh1egOOVQ1NFgTWjjhqCCBg-u-N1d4j5XQQg7dRTc-rdbSK5pqHAXWzSX4ecjhjm96XAtbebVyY",
+    "d": "W3PCMXuL2NPws4vQmraoMrl61egE__v7mWSkC3bDAcA"
+  }
+}

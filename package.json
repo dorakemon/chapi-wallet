@@ -11,8 +11,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.1",
+    "@transmute/did-key-bls12381": "0.3.0-unstable.10",
+    "@transmute/did-key-common": "0.3.0-unstable.10",
     "@types/react-syntax-highlighter": "^15.5.5",
+    "@zkp-ld/bls12381-key-pair": "^0.7.14",
+    "@zkp-ld/jsonld-signatures-bbs": "^0.11.17",
+    "buffer": "^6.0.3",
     "credential-handler-polyfill": "3.0.1",
+    "jsonld-signatures": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
@@ -22,6 +32,7 @@
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@vitejs/plugin-react": "^2.2.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",

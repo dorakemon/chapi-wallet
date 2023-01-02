@@ -1,7 +1,7 @@
-import * as WebCredentialHandler from "web-credential-handler";
 import * as CredentialHandlerPolyfill from "credential-handler-polyfill";
-
 import { useEffect } from "react";
+import * as WebCredentialHandler from "web-credential-handler";
+
 import { MEDIATOR } from "@/config";
 
 export const WalletWorker = () => {

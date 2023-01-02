@@ -1,14 +1,21 @@
-import { MEDIATOR } from "@/config";
+import { Container, Typography } from "@mui/material";
+import * as CredentialHandlerPolyfill from "credential-handler-polyfill";
 import { useEffect, useRef, useState } from "react";
 import * as WebCredentialHandler from "web-credential-handler";
-import * as CredentialHandlerPolyfill from "credential-handler-polyfill";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+import { MEDIATOR } from "@/config";
+import { SignatureRequest, StoreEventPayload, VCType } from "@/domain/models";
+import { CreateBoundVc } from "@/features/bound-vc";
+import { CreateSignatureRequest } from "@/features/signature-request";
+import { VerifyUnboundVc } from "@/features/unbound-vc";
 
 export const CredentialStore = () => {
-  const [credential, setCredential] = useState("{}");
-  const [vcType, setVcType] = useState("sample-vc");
-
   const storeEvent = useRef<any | null>(null);
+  const [storeEventPayload, setStoreEventPayload] =
+    useState<StoreEventPayload | null>(null);
+  const [returnValue, setReturnValue] = useState<
+    VCType | SignatureRequest | null
+  >(null);
 
   useEffect(() => {
     CredentialHandlerPolyfill.loadOnce(MEDIATOR).then(handleStoreEvent);
@@ -18,19 +25,24 @@ export const CredentialStore = () => {
     const event = await WebCredentialHandler.receiveCredentialEvent();
     storeEvent.current = event;
     console.log("Store Credential Event:", event.type, event);
-    //Your wallet's code for storing a Verifiable Credential
-
-    const vc = event.credential.data.verifiableCredential[0];
-    if (vc) {
-      setCredential(JSON.stringify(vc, null, 4));
-      setVcType(vc.type[vc.length - 1]);
+    if (event.type === "CreateCommitmentRequest") {
+      setStoreEventPayload({
+        type: "CreateSignatureRequest",
+        payload: event.credential.data
+      });
+    } else if (event.type === "BoundVerifiableCredential") {
+      setStoreEventPayload({
+        type: "StoreBoundCredential",
+        payload: event.credential.data
+      });
+    } else if (event.type === "VerifiableCredential") {
+      setStoreEventPayload({
+        type: "StoreUnboundCredential",
+        payload: event.credential.data
+      });
+    } else {
+      throw new Error(`${event.type} is not supported`);
     }
-  };
-
-  const downloadVc = () => {
-    const link = document.createElement("a");
-    link.href = credential;
-    link.download = `${vcType}.json`;
   };
 
   /**
@@ -42,9 +54,15 @@ export const CredentialStore = () => {
     if (storeEvent.current) {
       storeEvent.current.respondWith(
         new Promise((resolve) => {
-          return credential
-            ? resolve({ dataType: "VerifiablePresentation", data: credential })
-            : resolve(null);
+          if (!storeEventPayload) return resolve(null);
+          if (returnValue)
+            return resolve({
+              dataType: storeEventPayload.type,
+              data: returnValue
+            });
+          return resolve({
+            dataType: storeEventPayload.type
+          });
         })
       );
     } else {
@@ -53,11 +71,34 @@ export const CredentialStore = () => {
   };
 
   return (
-    <div>
-      <h2>Credential Store Page</h2>
-      <SyntaxHighlighter language="json">{credential}</SyntaxHighlighter>
-      <button onClick={downloadVc}>Download VC</button>
-      <button onClick={closeWindow}>Close Window</button>
-    </div>
+    <Container sx={{ minWidth: "90vw", mt: 4 }}>
+      <Typography variant="h4" textAlign="center">
+        Store Wallet Page
+      </Typography>
+      {storeEventPayload &&
+      storeEventPayload.type === "CreateSignatureRequest" ? (
+        <CreateSignatureRequest
+          sigRequestInput={storeEventPayload.payload}
+          setSigRequest={(sigRequest: SignatureRequest) =>
+            setReturnValue(sigRequest)
+          }
+          closeHandler={closeWindow}
+        />
+      ) : null}
+      {storeEventPayload &&
+      storeEventPayload.type === "StoreBoundCredential" ? (
+        <CreateBoundVc
+          blindBoundVc={storeEventPayload.payload}
+          onCloseBtnClicked={closeWindow}
+        />
+      ) : null}
+      {storeEventPayload &&
+      storeEventPayload.type === "StoreUnboundCredential" ? (
+        <VerifyUnboundVc
+          unboundVc={storeEventPayload.payload}
+          onCloseBtnClicked={closeWindow}
+        />
+      ) : null}
+    </Container>
   );
 };

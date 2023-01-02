@@ -1,9 +1,9 @@
 import { Navigate, useRoutes } from "react-router-dom";
 
-import { CredentialStore } from "@/pages/CredentialStore";
 import { CredentialGet } from "@/pages/CredentialGet";
-import { WalletWorker } from "@/pages/WalletWorker";
+import { CredentialStore } from "@/pages/CredentialStore";
 import { InstallWallet } from "@/pages/InstallWallet";
+import { WalletWorker } from "@/pages/WalletWorker";
 
 export const AppRoutes = () => {
   const commonRoutes = [

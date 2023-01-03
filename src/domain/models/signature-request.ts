@@ -6,6 +6,9 @@ export type SignatureRequest = {
   commitment: string;
   proofOfHiddenMessages: string;
   challengeHash: string;
+};
+
+export type SignatureRequestWithBlindingFactor = SignatureRequest & {
   blindingFactor: string;
 };
 

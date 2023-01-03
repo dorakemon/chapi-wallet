@@ -1,3 +1,4 @@
+import { CookiesProvider } from "react-cookie";
 import { BrowserRouter as Router } from "react-router-dom";
 
 type AppProviderProps = {
@@ -5,5 +6,9 @@ type AppProviderProps = {
 };
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-  return <Router>{children}</Router>;
+  return (
+    <CookiesProvider>
+      <Router>{children}</Router>
+    </CookiesProvider>
+  );
 };

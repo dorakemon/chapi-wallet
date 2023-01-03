@@ -56,7 +56,11 @@ export const VerifyUnboundVc: React.FC<Props> = (props) => {
       <Grid item>
         <Grid container justifyContent="center" spacing={3}>
           <Grid item>
-            <Button variant="contained" onClick={downloadHandler}>
+            <Button
+              variant="contained"
+              onClick={downloadHandler}
+              disabled={verifyStatus !== "valid"}
+            >
               Download
             </Button>
           </Grid>

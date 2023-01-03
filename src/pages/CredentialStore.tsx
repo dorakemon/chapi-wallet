@@ -89,7 +89,8 @@ export const CredentialStore = () => {
       {storeEventPayload &&
       storeEventPayload.type === "StoreBoundCredential" ? (
         <CreateBoundVc
-          blindBoundVc={storeEventPayload.payload}
+          nonce={storeEventPayload.payload.nonce}
+          blindBoundVc={storeEventPayload.payload.vc}
           onCloseBtnClicked={closeWindow}
         />
       ) : null}

@@ -1,4 +1,5 @@
 import { Button, Chip, Grid, Typography } from "@mui/material";
+import { useCookies } from "react-cookie";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -10,6 +11,7 @@ import { useUnblindBoundVc } from "../hooks/useUnblindBoundVc";
 import { useVerifyBoundVc } from "../hooks/useVerifyBoundVc";
 
 type Props = {
+  nonce: string;
   blindBoundVc: VCType;
   onCloseBtnClicked: () => void;
 };
@@ -17,6 +19,9 @@ type Props = {
 export const CreateBoundVc: React.FC<Props> = (props) => {
   const { unblindedVc, unblindVcHandler } = useUnblindBoundVc();
   const { verifyStatus, verifyVcHandler } = useVerifyBoundVc();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [cookies, _, _1] = useCookies();
 
   const { downloadFile } = useDownloadFile();
 
@@ -29,8 +34,8 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
   };
 
   const unblindHandler = () => {
-    // FIXME: get from cookie
-    unblindVcHandler(props.blindBoundVc, "");
+    const blindingFactor = cookies[props.nonce];
+    unblindVcHandler(props.blindBoundVc, blindingFactor);
   };
 
   return (
@@ -83,7 +88,11 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
       <Grid item>
         <Grid container justifyContent="center" spacing={3}>
           <Grid item>
-            <Button variant="contained" onClick={downloadHandler}>
+            <Button
+              variant="contained"
+              onClick={downloadHandler}
+              disabled={verifyStatus !== "valid"}
+            >
               Download
             </Button>
           </Grid>

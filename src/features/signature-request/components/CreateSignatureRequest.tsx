@@ -1,5 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -15,7 +16,8 @@ type Props = {
 
 export const CreateSignatureRequest: React.FC<Props> = (props) => {
   const sigReqInputJson = JSON.stringify(props.sigRequestInput, null, 2);
-  const [sigReqJson, setSigReqJson] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setCookie, _1] = useCookies();
 
   const { sigRequest, createSignatureRequestHandler } =
     useCreateSignatureRequest();
@@ -25,8 +27,13 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
       const sigRequest = await createSignatureRequestHandler(
         props.sigRequestInput
       );
-      setSigReqJson(JSON.stringify(sigRequest, null, 2));
-      props.setSigRequest(sigRequest);
+      props.setSigRequest({
+        commitment: sigRequest.commitment,
+        challengeHash: sigRequest.challengeHash,
+        proofOfHiddenMessages: sigRequest.proofOfHiddenMessages
+      });
+      // FIXME: Cookie oftions
+      setCookie(props.sigRequestInput.nonce, sigRequest.blindingFactor);
     };
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,7 +68,7 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
               Credential Store Request
             </Typography>
             <SyntaxHighlighter language="json" style={monokaiSublime}>
-              {sigReqJson}
+              {sigRequest ? JSON.stringify(sigRequest, null, 2) : ""}
             </SyntaxHighlighter>
           </Grid>
         </Grid>

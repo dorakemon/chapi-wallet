@@ -6,7 +6,7 @@ import {
 } from "@zkp-ld/bbs-signatures";
 import { Bls12381G2KeyPair } from "@zkp-ld/bls12381-key-pair";
 
-import { SignatureRequest } from "@/domain/models";
+import { SignatureRequestWithBlindingFactor } from "@/domain/models";
 import {
   strToUint8arr,
   base64ToUint8Array,
@@ -31,7 +31,7 @@ type SignatureRequetProps = {
  */
 export const createSignatureRequest = async (
   props: SignatureRequetProps
-): Promise<SignatureRequest> => {
+): Promise<SignatureRequestWithBlindingFactor> => {
   try {
     const request: BoundedBlsSignatureRequestContextRequest = {
       issuerPublicKey: new Uint8Array(props.issuerPublicKey.publicKeyBuffer),

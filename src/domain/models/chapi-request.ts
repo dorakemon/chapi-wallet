@@ -3,5 +3,5 @@ import { VCType } from "./vc";
 
 export type StoreEventPayload =
   | { type: "CreateSignatureRequest"; payload: SignatureRequestInput }
-  | { type: "StoreBoundCredential"; payload: VCType }
+  | { type: "StoreBoundCredential"; payload: { vc: VCType; nonce: string } }
   | { type: "StoreUnboundCredential"; payload: VCType };

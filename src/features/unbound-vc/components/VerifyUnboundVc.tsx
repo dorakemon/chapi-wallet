@@ -28,7 +28,7 @@ export const VerifyUnboundVc: React.FC<Props> = (props) => {
   };
 
   return (
-    <Grid justifyContent="center" container direction="column" mt={2}>
+    <Grid justifyContent="center" direction="column" mt={2} mb={2} container>
       <Grid item>
         <Grid container direction="row" justifyContent="space-between">
           <Grid item>

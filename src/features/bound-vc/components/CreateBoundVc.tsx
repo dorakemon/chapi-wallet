@@ -39,7 +39,7 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
   };
 
   return (
-    <Grid justifyContent="center" container direction="column" mt={2}>
+    <Grid justifyContent="center" direction="column" mt={2} mb={2} container>
       <Grid item>
         <Grid
           direction="row"
@@ -49,7 +49,7 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
           maxWidth="90vw"
           container
         >
-          <Grid md={6} sm={12} item>
+          <Grid sm={6} xs={12} item>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="subtitle1">Blind Bound VC</Typography>
@@ -64,7 +64,7 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
               {JSON.stringify(props.blindBoundVc, null, 2)}
             </SyntaxHighlighter>
           </Grid>
-          <Grid md={6} sm={12} item>
+          <Grid sm={6} xs={12} item>
             <Grid container alignItems="center" justifyContent="space-between">
               <Grid item>
                 <Typography variant="subtitle1">Bound VC</Typography>

@@ -45,7 +45,7 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
   };
 
   return (
-    <Grid direction="column" justifyContent="center" container>
+    <Grid direction="column" justifyContent="center" mt={2} mb={2} container>
       <Grid item>
         <Grid
           direction="row"

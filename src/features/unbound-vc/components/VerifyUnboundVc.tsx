@@ -33,7 +33,13 @@ export const VerifyUnboundVc: React.FC<Props> = (props) => {
   };
 
   return (
-    <Grid justifyContent="center" direction="column" mt={2} mb={2} container>
+    <Grid
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+      my={2}
+      container
+    >
       <Grid item>
         <Grid container direction="row" justifyContent="space-between">
           <Grid item>
@@ -48,8 +54,6 @@ export const VerifyUnboundVc: React.FC<Props> = (props) => {
             />
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item>
         <SyntaxHighlighter
           language="json"
           style={monokaiSublime}

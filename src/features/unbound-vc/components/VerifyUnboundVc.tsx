@@ -1,4 +1,5 @@
 import { Button, Chip, Grid, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -14,6 +15,10 @@ type Props = {
 };
 
 export const VerifyUnboundVc: React.FC<Props> = (props) => {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "features.unboundVc"
+  });
+
   const { verifyStatus, verifyVcHandler } = useVerifyUnboundVc();
   const { downloadFile } = useDownloadFile();
 
@@ -36,7 +41,7 @@ export const VerifyUnboundVc: React.FC<Props> = (props) => {
           </Grid>
           <Grid item>
             <Chip
-              label={VerifyChipStyle[verifyStatus].text}
+              label={t(VerifyChipStyle[verifyStatus].text)}
               color={VerifyChipStyle[verifyStatus].color}
               variant={VerifyChipStyle[verifyStatus].variant}
               onClick={() => verifyVcHandler(props.unboundVc)}

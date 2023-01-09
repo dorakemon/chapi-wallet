@@ -1,5 +1,5 @@
 import { Button, Chip, Grid, Typography } from "@mui/material";
-import { useCookies } from "react-cookie";
+import { useTranslation } from "react-i18next";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -17,11 +17,12 @@ type Props = {
 };
 
 export const CreateBoundVc: React.FC<Props> = (props) => {
+  const { t } = useTranslation("translation", {
+    keyPrefix: "features.boundVc"
+  });
+
   const { unblindedVc, unblindVcHandler } = useUnblindBoundVc();
   const { verifyStatus, verifyVcHandler } = useVerifyBoundVc();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookies, _, _1] = useCookies();
 
   const { downloadFile } = useDownloadFile();
 
@@ -34,7 +35,9 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
   };
 
   const unblindHandler = () => {
-    const blindingFactor = cookies[props.nonce];
+    const blindingFactor = localStorage.getItem(props.nonce);
+    localStorage.removeItem(props.nonce);
+    if (!blindingFactor) throw new Error("Cannot find blinding factor");
     unblindVcHandler(props.blindBoundVc, blindingFactor);
   };
 
@@ -71,7 +74,7 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
               </Grid>
               <Grid item>
                 <Chip
-                  label={VerifyChipStyle[verifyStatus].text}
+                  label={t(VerifyChipStyle[verifyStatus].text)}
                   color={VerifyChipStyle[verifyStatus].color}
                   variant={VerifyChipStyle[verifyStatus].variant}
                   onClick={() => verifyVcHandler(unblindedVc!)}

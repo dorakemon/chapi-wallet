@@ -1,6 +1,5 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { useCookies } from "react-cookie";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { monokaiSublime } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -16,31 +15,36 @@ type Props = {
 
 export const CreateSignatureRequest: React.FC<Props> = (props) => {
   const sigReqInputJson = JSON.stringify(props.sigRequestInput, null, 2);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setCookie, _1] = useCookies();
 
   const { sigRequest, createSignatureRequestHandler } =
     useCreateSignatureRequest();
 
   useEffect(() => {
     const init = async () => {
-      const sigRequest = await createSignatureRequestHandler(
+      const _sigRequest = await createSignatureRequestHandler(
         props.sigRequestInput
       );
       props.setSigRequest({
-        commitment: sigRequest.commitment,
-        challengeHash: sigRequest.challengeHash,
-        proofOfHiddenMessages: sigRequest.proofOfHiddenMessages
+        commitment: _sigRequest.commitment,
+        challengeHash: _sigRequest.challengeHash,
+        proofOfHiddenMessages: _sigRequest.proofOfHiddenMessages
       });
-      // FIXME: Cookie oftions
-      setCookie(props.sigRequestInput.nonce, sigRequest.blindingFactor);
+      localStorage.setItem(
+        props.sigRequestInput.nonce,
+        _sigRequest.blindingFactor
+      );
     };
+
     init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.sigRequestInput]);
 
   const retBtnHandler = () => {
     if (!sigRequest) return;
+    localStorage.setItem(
+      props.sigRequestInput.nonce,
+      sigRequest.blindingFactor
+    );
     props.closeHandler();
   };
 

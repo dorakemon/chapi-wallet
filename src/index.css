@@ -15,20 +15,7 @@
 body {
   margin: 0;
   display: flex;
-  min-width: 320px;
+  min-width: 250px;
   min-height: 100vh;
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  padding: 0;
 }

@@ -42,7 +42,13 @@ export const CreateBoundVc: React.FC<Props> = (props) => {
   };
 
   return (
-    <Grid justifyContent="center" direction="column" mt={2} mb={2} container>
+    <Grid
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+      my={2}
+      container
+    >
       <Grid item>
         <Grid
           direction="row"

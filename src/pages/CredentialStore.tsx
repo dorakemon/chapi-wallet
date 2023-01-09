@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import * as CredentialHandlerPolyfill from "credential-handler-polyfill";
 import { useEffect, useRef, useState } from "react";
 import * as WebCredentialHandler from "web-credential-handler";
@@ -72,7 +72,14 @@ export const CredentialStore = () => {
   };
 
   return (
-    <Container sx={{ minWidth: "90vw", mt: 4 }}>
+    <Box
+      display="flex"
+      justifyContent="start"
+      alignItems="center"
+      flexDirection="column"
+      width="100vw"
+      sx={{ mt: 4 }}
+    >
       <Typography variant="h4" textAlign="center">
         Store Wallet Page
       </Typography>
@@ -101,6 +108,6 @@ export const CredentialStore = () => {
           onCloseBtnClicked={closeWindow}
         />
       ) : null}
-    </Container>
+    </Box>
   );
 };

@@ -49,7 +49,13 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
   };
 
   return (
-    <Grid direction="column" justifyContent="center" mt={2} mb={2} container>
+    <Grid
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+      my={2}
+      container
+    >
       <Grid item>
         <Grid
           direction="row"
@@ -59,7 +65,7 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
           maxWidth="90vw"
           container
         >
-          <Grid md={6} sm={12} item>
+          <Grid sm={6} xs={12} item>
             <Typography variant="subtitle1">
               Credential Store Request Input
             </Typography>
@@ -67,7 +73,7 @@ export const CreateSignatureRequest: React.FC<Props> = (props) => {
               {sigReqInputJson}
             </SyntaxHighlighter>
           </Grid>
-          <Grid md={6} sm={12} item>
+          <Grid sm={6} xs={12} item>
             <Typography variant="subtitle1">
               Credential Store Request
             </Typography>

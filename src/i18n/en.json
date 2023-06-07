@@ -1,0 +1,14 @@
+{
+  "features": {
+    "boundVc": {
+      "verifyStatus.valid": "Accepted",
+      "verifyStatus.invalid": "Rejected",
+      "verifyStatus.unchecked": "Unchecked"
+    },
+    "unboundVc": {
+      "verifyStatus.valid": "Accepted",
+      "verifyStatus.invalid": "Rejected",
+      "verifyStatus.unchecked": "Unchecked"
+    }
+  }
+}

@@ -5,7 +5,6 @@ import * as WebCredentialHandler from "web-credential-handler";
 import { MEDIATOR } from "@/config";
 
 export const WalletWorker = () => {
-  console.log("hello");
   useEffect(() => {
     const worker = async () => {
       try {
